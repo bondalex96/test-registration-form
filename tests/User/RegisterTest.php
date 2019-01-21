@@ -2,6 +2,9 @@
 
 namespace App\Tests\User;
 
+use App\Domain\Entity\User\NickName;
+use App\Domain\Entity\User\User;
+use App\Domain\Entity\User\UserName;
 use PHPUnit\Framework\TestCase;
 
 class RegisterTest extends TestCase
@@ -10,7 +13,7 @@ class RegisterTest extends TestCase
     {
         $user = User::register(
             $id = 1,
-            $nickname = new Nickname($nick = 'nick96'),
+            $nickname = new NickName($nick = 'nick96'),
             new UserName($firstName = 'имя', $lastName = 'фамилия'),
             $email = 'some-email@gmail.com',
             $password = 'pa23pa2'
@@ -21,35 +24,36 @@ class RegisterTest extends TestCase
         $this->assertEquals($firstName, $user->getName()->getFirstName());
         $this->assertEquals($lastName, $user->getName()->getLastName());
         $this->assertEquals($email, $user->getEmail());
+        $this->assertNotNull($email, $user->getPassword());
     }
 
     public function testRegistrationWithInvalidEmail()
     {
-        $this->expectException(new \DomainException('Invalid email!'));
+        $this->expectExceptionObject(new \DomainException('Invalid email!'));
         User::register(
             $id = 1,
             $nickname = new Nickname($nick = 'nick96'),
             new UserName($firstName = 'имя', $lastName = 'фамилия'),
-            $email = 'some-email@gmail.com',
+            $email = 'soom',
             $password = 'pa23pa2'
         );
     }
 
     public function testRegistrationWithEmptyEmail()
     {
-        $this->expectException(new \DomainException('Email can\'t be empty!'));
+        $this->expectExceptionObject(new \DomainException('Email can\'t be empty!'));
         User::register(
             $id = 1,
             $nickname = new Nickname($nick = 'nick96'),
             new UserName($firstName = 'имя', $lastName = 'фамилия'),
-            $email = 'some-email@gmail.com',
+            $email = '',
             $password = 'pa23pa2'
         );
     }
 
     public function testRegistrationWithShortPassword()
     {
-        $this->expectException(new \DomainException('Password shouldn\'t contain less than 5 characters'));
+        $this->expectExceptionObject(new \DomainException('Password shouldn\'t contain less than 5 characters'));
         User::register(
             $id = 1,
             $nickname = new Nickname($nick = 'nick96'),

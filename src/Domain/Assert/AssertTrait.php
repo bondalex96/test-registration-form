@@ -25,4 +25,14 @@ trait AssertTrait
     {
         Assert::regex($value, Regex::ONLY_RUSSIAN_CHARACTERS, $message);
     }
+
+    protected function assertEmail($value, $message): void
+    {
+        Assert::regex($value, Regex::EMAIL, $message);
+    }
+
+    protected function assertMinLength($value, $minLength, $message): void
+    {
+        Assert::minLength($value, $minLength, $message);
+    }
 }

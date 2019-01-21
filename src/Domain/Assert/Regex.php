@@ -15,4 +15,5 @@ class Regex
     const ONLY_LATIN_CHARACTERS_AND_DIGITS = '/^[a-zA-Z0-9]+$/';
     // [а-яА-Я] Not works properly :(
     const ONLY_RUSSIAN_CHARACTERS = '/^[аАбБвВгГдДеЕёЁжЖзЗиИйЙкКлЛмМнНоОпПрРсСтТуУфФхХцЦчЧшШщЩъЪыЫьЬэЭюЮяЯ]+$/';
+    const EMAIL = '/^([\w\-\.]+)@((\[([0-9]{1,3}\.){3}[0-9]{1,3}\])|(([\w\-]+\.)+)([a-zA-Z]{2,4}))$/';
 }
