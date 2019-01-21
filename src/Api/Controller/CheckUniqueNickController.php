@@ -13,15 +13,8 @@ class CheckUniqueNickController extends BaseController
      */
     public function index(string $nick)
     {
-        try {
-            return $this->json([
-                'unique' => $this->getInteractor()->execute($nick)
-            ], Response::HTTP_OK);
-
-        } catch (\DomainException $exception) {
-            return $this->json(['errors' => [$exception->getMessage()]], Response::HTTP_BAD_REQUEST);
-        } catch (\Throwable $exception) {
-            return $this->handleInternalException($exception);
-        }
+        return $this->json([
+            'unique' => $this->getInteractor()->execute($nick)
+        ], Response::HTTP_OK);
     }
 }

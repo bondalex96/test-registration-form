@@ -15,20 +15,8 @@ class RegistrationController extends BaseController
      */
     public function index()
     {
-        try {
+        $user = $this->getInteractor()->execute();
 
-            $user = $this->getInteractor()->execute();
-
-            return $this->json(['id' => $user->getId()], Response::HTTP_CREATED);
-
-        } catch (\DomainException $exception) {
-            return $this->json(['errors' => [$exception->getMessage()]], Response::HTTP_BAD_REQUEST);
-
-        } catch (FormValidationException $exception) {
-            return $this->json(['errors' => $exception->getErrorsMessages()], Response::HTTP_BAD_REQUEST);
-
-        } catch (\Throwable $exception) {
-            return $this->handleInternalException($exception);
-        }
+        return $this->json(['id' => $user->getId()], Response::HTTP_CREATED);
     }
 }

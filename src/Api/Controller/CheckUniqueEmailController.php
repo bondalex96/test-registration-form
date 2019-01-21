@@ -13,14 +13,8 @@ class CheckUniqueEmailController extends BaseController
      */
     public function index(string $email)
     {
-        try {
-
-            return $this->json([
-                'unique' => $this->getInteractor()->execute($email)
-            ], Response::HTTP_OK);
-
-        } catch (\Throwable $exception) {
-            return $this->handleInternalException($exception);
-        }
+        return $this->json([
+            'unique' => $this->getInteractor()->execute($email)
+        ], Response::HTTP_OK);
     }
 }
