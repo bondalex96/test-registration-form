@@ -7,16 +7,15 @@ use App\Domain\Entity\User\User;
 use App\Domain\Entity\User\UserName;
 use PHPUnit\Framework\TestCase;
 
-class RegisterTest extends TestCase
+class UserTest extends TestCase
 {
-    public function testSuccessRegistration()
+    public function testSuccessCreation()
     {
-        $user = User::register(
+        $user = new User(
             $id = '1',
             $nickname = new NickName($nick = 'nick96'),
             new UserName($firstName = 'имя', $lastName = 'фамилия'),
-            $email = 'some-email@gmail.com',
-            $password = 'pa23pa2'
+            $email = 'some-email@gmail.com'
         );
 
         $this->assertEquals($id, $user->getId());
@@ -24,30 +23,44 @@ class RegisterTest extends TestCase
         $this->assertEquals($firstName, $user->getName()->getFirstName());
         $this->assertEquals($lastName, $user->getName()->getLastName());
         $this->assertEquals($email, $user->getEmail());
-        $this->assertNotNull($email, $user->getPassword());
+        $this->assertNull($user->getPassword());
     }
 
-    public function testRegistrationWithInvalidEmail()
+    public function testCreationWithInvalidEmail()
     {
         $this->expectExceptionObject(new \DomainException('Невалидный электронный адрес!'));
-        User::register(
+        new User(
             $id = '1',
             $nickname = new Nickname($nick = 'nick96'),
             new UserName($firstName = 'имя', $lastName = 'фамилия'),
-            $email = 'soom',
-            $password = 'pa23pa2'
+            $email = 'soom'
         );
     }
 
     public function testRegistrationWithEmptyEmail()
     {
-        $this->expectExceptionObject(new \DomainException('Электронный адрес обязательна для ввода!'));
-        User::register(
+        $this->expectExceptionObject(new \DomainException('Электронный адрес обязателен для ввода!'));
+        new User(
             $id = '1',
             $nickname = new Nickname($nick = 'nick96'),
             new UserName($firstName = 'имя', $lastName = 'фамилия'),
-            $email = '',
-            $password = 'pa23pa2'
+            $email = ''
         );
+    }
+
+    public function setPassword()
+    {
+        $user = new User(
+            $id = '1',
+            $nickname = new Nickname($nick = 'nick96'),
+            new UserName($firstName = 'имя', $lastName = 'фамилия'),
+            $email = 'soom'
+        );
+
+        $user->setPassword($password = '12345');
+        $this->assertEquals($user->getPassword(), $password);
+
+        $this->expectExceptionObject(new \DomainException('У пользователя уже установлен пароль!'));
+        $this->setPassword('1234567');
     }
 }

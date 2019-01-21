@@ -23,14 +23,6 @@ class User
         $this->setEmail($email);
     }
 
-    public static function register(string $id, NickName $nickName, UserName $userName, string $email, string  $password): User
-    {
-        $user = new self($id, $nickName, $userName, $email);
-        $user->setPassword($password);
-
-        return $user;
-    }
-
     public function getId(): string
     {
         return $this->id;
@@ -51,16 +43,18 @@ class User
         return $this->email;
     }
 
-    public function getPassword(): string
+    public function getPassword(): ?string
     {
         return $this->password;
     }
 
     public function setPassword(string $password): void
     {
+        if ($this->password) {
+            throw new \DomainException('У пользователя уже установлен пароль!');
+        }
         $this->password = $password;
     }
-
 
     // Private Methods
 
@@ -76,7 +70,7 @@ class User
 
     private function setEmail(string $email): void
     {
-        $this->assertNotEmpty($email, 'Электронный адрес обязательна для ввода!');
+        $this->assertNotEmpty($email, 'Электронный адрес обязателен для ввода!');
         $this->assertEmail($email, 'Невалидный электронный адрес!');
         $this->email = $email;
     }

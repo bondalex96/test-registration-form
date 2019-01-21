@@ -17,7 +17,7 @@ class RegistrationDto
     public $firstName;
 
     /**
-     * @Assert\NotBlank(message="Фамилия обязательная для ввода!")
+     * @Assert\NotBlank(message="Фамилия обязательна для ввода!")
      */
     public $lastName;
 
