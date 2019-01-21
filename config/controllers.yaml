@@ -1,5 +1,5 @@
 services:
-  App\Infrastructure\Controller\BaseWriteController:
+  App\Infrastructure\Controller\BaseController:
     arguments:
     - '@logger'
     tags:
@@ -8,4 +8,9 @@ services:
   App\Api\Controller\RegistrationController:
     arguments:
       - '@App\Application\UseCase\FormValidationRegistration'
-    parent: App\Infrastructure\Controller\BaseWriteController
+    parent: App\Infrastructure\Controller\BaseController
+
+  App\Api\Controller\CheckUniqueEmailController:
+    arguments:
+    - '@App\Application\UseCase\CheckUniqueEmail'
+    parent: App\Infrastructure\Controller\BaseController

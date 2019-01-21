@@ -17,3 +17,6 @@ services:
       - '@App\Application\UseCase\Registration'
       - 'App\Api\HttpForm\Registration'
 
+  App\Application\UseCase\CheckUniqueEmail:
+    arguments:
+    - '@App\Domain\Specification\User\UniqueEmailSpecification'

@@ -9,7 +9,7 @@ use Psr\Log\LoggerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 
-abstract class BaseWriteController extends AbstractController
+abstract class BaseController extends AbstractController
 {
     private $interactor;
     private $logger;
@@ -20,7 +20,7 @@ abstract class BaseWriteController extends AbstractController
         $this->interactor = $interactor;
     }
 
-    protected function getInteractor(): FormValidationInteractorProxy
+    protected function getInteractor(): Interactor
     {
         return $this->interactor;
     }
