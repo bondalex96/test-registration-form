@@ -1,0 +1,40 @@
+version: '2'
+
+services:
+    db:
+        image: mysql
+        volumes:
+            - "./docker/mysql/data:/var/lib/mysql"
+        restart: always
+        environment:
+            MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+            MYSQL_DATABASE: ${MYSQL_DATABASE}
+            MYSQL_USER: ${MYSQL_USER}
+            MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+        ports:
+            - 3306:3306
+    php:
+        build:
+            context: ./
+            dockerfile: ./docker/php/Dockerfile
+        restart: always
+        volumes:
+            - ${APP_PATH}:/var/www/app
+            - ${SSH_PATH}:/root/.ssh
+        links:
+            - db:mysql
+        environment:
+            MYSQL_HOST: ${MYSQL_HOST}
+            MYSQL_PORT: ${MYSQL_PORT}
+            MYSQL_DATABASE: ${MYSQL_DATABASE}
+            MYSQL_USER: ${MYSQL_USER}
+            MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+    nginx:
+        build: docker/nginx
+        restart: always
+        ports:
+            - 80:80
+        volumes_from:
+            - php
+        volumes:
+            - ./docker/nginx/logs:/var/log/nginx

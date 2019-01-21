@@ -1,0 +1,14 @@
+services:
+    App\Infrastructure\EventListener\Http\PreflightRequestListener:
+        tags:
+            - { name: kernel.event_listener, event: kernel.request, priority: 33 }
+
+    App\Infrastructure\EventListener\Http\JsonDecoderListener:
+        arguments:
+            - '@logger'
+        tags:
+        - { name: kernel.event_listener, event: kernel.request }
+
+    App\Infrastructure\EventListener\Http\CORSListener:
+        tags:
+        - { name: kernel.event_listener, event: kernel.response }

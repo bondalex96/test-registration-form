@@ -1,0 +1,25 @@
+
+###> symfony/framework-bundle ###
+/.env
+/public/bundles/
+/var/
+/vendor/
+###< symfony/framework-bundle ###
+
+###> PhpStorm ###
+.idea
+###< PhpStorm ###
+
+###> MacOs ###
+.DS_Store
+###< MacOs ###
+
+###> Docker ###
+/docker/mysql/data
+/docker/nginx/logs
+###< Docker ###
+
+###> symfony/phpunit-bridge ###
+.phpunit
+/phpunit.xml
+###< symfony/phpunit-bridge ###
