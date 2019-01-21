@@ -9,4 +9,5 @@ interface UserRepository
 {
     public function findByEmail(string $email): ?User;
     public function save(): void;
+    public function nextId(): int;
 }

@@ -18,6 +18,6 @@ class UniqueEmailSpecification
     public function isSatisfiedBy(string $email): bool
     {
         $user = $this->userRepository->findByEmail($email);
-        return $user instanceof User;
+        return !($user instanceof User);
     }
 }
