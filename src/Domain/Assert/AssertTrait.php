@@ -20,4 +20,9 @@ trait AssertTrait
     {
         Assert::notEmpty($value, $message);
     }
+
+    protected function assertThatContainOnlyRussianCharacters($value, $message): void
+    {
+        Assert::regex($value, Regex::ONLY_RUSSIAN_CHARACTERS, $message);
+    }
 }

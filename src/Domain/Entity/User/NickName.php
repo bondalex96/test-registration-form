@@ -21,6 +21,8 @@ class NickName
         return $this->name;
     }
 
+    // Private Methods
+
     private function setNickName(string $nickName): void
     {
         $this->assertNotEmpty($nickName, 'Nickname shouldn\'t be empty!');
