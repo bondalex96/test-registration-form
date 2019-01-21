@@ -46,6 +46,11 @@ class Kernel extends BaseKernel
         $loader->load($confDir.'/{services}'.self::CONFIG_EXTS, 'glob');
         $loader->load($confDir.'/{services}_'.$this->environment.self::CONFIG_EXTS, 'glob');
         $loader->load($confDir.'/{event_listeners}'.self::CONFIG_EXTS, 'glob');
+        $loader->load($confDir.'/{repositories}'.self::CONFIG_EXTS, 'glob');
+        $loader->load($confDir.'/{interactors}'.self::CONFIG_EXTS, 'glob');
+        $loader->load($confDir.'/{factories}'.self::CONFIG_EXTS, 'glob');
+        $loader->load($confDir.'/{specifications}'.self::CONFIG_EXTS, 'glob');
+        $loader->load($confDir.'/{controllers}'.self::CONFIG_EXTS, 'glob');
 
     }
 

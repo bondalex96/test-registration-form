@@ -13,3 +13,6 @@ initialize: ## Initialize project
 	@cp .env.dist .env
 	@docker-compose up -d
 	@docker-compose run php composer install
+	@docker-compose run php bin/console d:m:m -e dev
+	@docker-compose run php bin/console d:d:c -e test
+	@docker-compose run php bin/console d:m:m -e test

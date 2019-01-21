@@ -1,0 +1,4 @@
+services:
+    App\Persistence\Repository\Doctrine\UserRepository:
+        arguments:
+            - '@doctrine.orm.entity_manager'

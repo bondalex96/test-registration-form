@@ -1,0 +1,6 @@
+services:
+  App\Application\UseCase\Registration:
+    arguments:
+      - '@App\Persistence\Repository\Doctrine\UserRepository'
+      - '@App\Domain\Factory\User\UserFactory'
+

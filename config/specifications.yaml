@@ -1,0 +1,4 @@
+services:
+  App\Domain\Specification\User\UniqueEmailSpecification:
+    arguments:
+      - '@App\Persistence\Repository\Doctrine\UserRepository'

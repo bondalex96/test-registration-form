@@ -1,0 +1,5 @@
+App\Domain\Entity\User\NickName:
+  type: embeddable
+  fields:
+    name:
+      type: string

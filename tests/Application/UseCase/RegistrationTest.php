@@ -5,30 +5,32 @@ namespace App\Tests\Application\UseCase;
 use App\Application\DTO\RegistrationDto;
 use App\Application\UseCase\Registration;
 use App\Domain\Entity\User\User;
-use App\Domain\Factory\User\UserFactory;
-use App\Domain\Specification\User\UniqueEmailSpecification;
-use App\Persistence\Repository\InMemory\UserRepository;
+use App\Persistence\Repository\Doctrine\UserRepository;
 use App\Test\User\UserBuilder;
-use PHPUnit\Framework\TestCase;
+use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 
-class RegistrationTest extends TestCase
+class RegistrationTest extends KernelTestCase
 {
     private $repository;
     private $interactor;
 
     public function __construct(?string $name = null, array $data = [], string $dataName = '')
     {
+        self::bootKernel();
+        $container = self::$container;
+
+        $this->repository = $container->get(UserRepository::class);
+        $this->interactor = $container->get(Registration::class);
+
         $userBuilder = new UserBuilder();
         $firstUser = $userBuilder
-            ->withId('qwe')
+            ->withId($this->repository->nextId())
             ->withEmail('some@email.com')
             ->build();
-        $this->repository = new UserRepository([$firstUser]);
-        $this->interactor = new Registration(
-            $this->repository,
-            new UserFactory(
-                new UniqueEmailSpecification($this->repository), $this->repository)
-        );
+
+        $this->repository->removeAll();
+        $this->repository->save($firstUser);
+
         parent::__construct($name, $data, $dataName);
     }
 

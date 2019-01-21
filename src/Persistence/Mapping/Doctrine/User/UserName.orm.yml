@@ -1,0 +1,7 @@
+App\Domain\Entity\User\UserName:
+  type: embeddable
+  fields:
+    firstName:
+      type: string
+    lastName:
+      type: string

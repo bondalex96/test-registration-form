@@ -1,0 +1,23 @@
+App\Domain\Entity\User\User:
+  type: entity
+  table: user
+  id:
+    id:
+      type: string
+      length: 36
+  fields:
+    email:
+      unique: true
+      column: email
+      type: string
+    password:
+      nullable: true
+      column: password
+      type: string
+  embedded:
+    nickName:
+      column: nick
+      class: NickName
+    userName:
+      column: name
+      class: UserName
