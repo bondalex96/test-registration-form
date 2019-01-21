@@ -16,13 +16,17 @@ class User
     private $email;
     private $password;
 
-    public static function register(int $id, NickName $nickName, UserName $userName, string $email, string  $password): User
+    public function __construct(string $id, NickName $nickName, UserName $userName, string $email)
     {
-        $user = new self();
-        $user->id = $id;
-        $user->setNickName($nickName);
-        $user->setUserName($userName);
-        $user->setEmail($email);
+        $this->id = $id;
+        $this->setNickName($nickName);
+        $this->setUserName($userName);
+        $this->setEmail($email);
+    }
+
+    public static function register(string $id, NickName $nickName, UserName $userName, string $email, string  $password): User
+    {
+        $user = new self($id, $nickName, $userName, $email);
         $user->setPassword($password);
 
         return $user;

@@ -12,7 +12,7 @@ class RegisterTest extends TestCase
     public function testSuccessRegistration()
     {
         $user = User::register(
-            $id = 1,
+            $id = '1',
             $nickname = new NickName($nick = 'nick96'),
             new UserName($firstName = 'имя', $lastName = 'фамилия'),
             $email = 'some-email@gmail.com',
@@ -31,7 +31,7 @@ class RegisterTest extends TestCase
     {
         $this->expectExceptionObject(new \DomainException('Invalid email!'));
         User::register(
-            $id = 1,
+            $id = '1',
             $nickname = new Nickname($nick = 'nick96'),
             new UserName($firstName = 'имя', $lastName = 'фамилия'),
             $email = 'soom',
@@ -43,7 +43,7 @@ class RegisterTest extends TestCase
     {
         $this->expectExceptionObject(new \DomainException('Email can\'t be empty!'));
         User::register(
-            $id = 1,
+            $id = '1',
             $nickname = new Nickname($nick = 'nick96'),
             new UserName($firstName = 'имя', $lastName = 'фамилия'),
             $email = '',
@@ -55,7 +55,7 @@ class RegisterTest extends TestCase
     {
         $this->expectExceptionObject(new \DomainException('Password shouldn\'t contain less than 5 characters'));
         User::register(
-            $id = 1,
+            $id = '1',
             $nickname = new Nickname($nick = 'nick96'),
             new UserName($firstName = 'имя', $lastName = 'фамилия'),
             $email = 'some-email@gmail.com',

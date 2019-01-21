@@ -20,7 +20,7 @@ class UserFactory
         $this->uniqueEmailSpecification = $uniqueEmailSpecification;
     }
 
-    public function register(string $name, string $firstName, string $lastName, string $email, string $password): User
+    public function register(string $nick, string $firstName, string $lastName, string $email, string $password): User
     {
         if (!$this->uniqueEmailSpecification->isSatisfiedBy($email)) {
             throw new \DomainException('User with email ' . $email . ' already exists!');
@@ -29,7 +29,7 @@ class UserFactory
 
         return User::register(
             $userId,
-            new NickName($name),
+            new NickName($nick),
             new UserName($firstName, $lastName),
             $email,
             $password
