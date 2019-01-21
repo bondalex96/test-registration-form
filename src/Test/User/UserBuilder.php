@@ -9,7 +9,7 @@ use App\Domain\Entity\User\UserName;
 
 class UserBuilder
 {
-    private $id = 1;
+    private $id = '1';
     private $nick = 'nick94';
     private $firstName = 'имя';
     private $lastName = 'фамилия';
