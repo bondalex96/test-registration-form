@@ -9,7 +9,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class CheckUniqueNickController extends BaseController
 {
     /**
-     * @Route("/nick/{nick}/check-unique", name="check_email", methods={"GET"})
+     * @Route("/nick/{nick}/check-unique", name="check_nick", methods={"GET"})
      */
     public function index(string $nick)
     {
