@@ -3,6 +3,7 @@
 namespace App\Persistence\Repository\InMemory;
 
 
+use App\Domain\Entity\User\NickName;
 use App\Domain\Entity\User\User;
 use App\Domain\Repository\NotFoundException;
 use Ramsey\Uuid\Uuid;
@@ -51,6 +52,13 @@ class UserRepository implements \App\Domain\Repository\User\UserRepository
     private function add(User $user): void
     {
         $this->users[spl_object_hash($user)] = $user;
+    }
+
+    public function findByNick(NickName $nickName): ?User
+    {
+        return $this->findOneByExpression(function (User $user) use ($nickName) {
+            return $user->getNickName()->isEqual($nickName);
+        });
     }
 
     private function findOneByExpression($expression): ?User

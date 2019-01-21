@@ -14,3 +14,8 @@ services:
     arguments:
     - '@App\Application\UseCase\CheckUniqueEmail'
     parent: App\Infrastructure\Controller\BaseController
+
+  App\Api\Controller\CheckUniqueNickController:
+    arguments:
+    - '@App\Application\UseCase\CheckUniqueNick'
+    parent: App\Infrastructure\Controller\BaseController

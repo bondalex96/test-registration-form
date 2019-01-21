@@ -21,6 +21,10 @@ class NickName
         return $this->name;
     }
 
+    public function isEqual(NickName $nickName) {
+        return mb_strtolower($this->getNickname()) === mb_strtolower($nickName->getNickname());
+    }
+
     // Private Methods
 
     private function setNickName(string $nickName): void

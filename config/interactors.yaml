@@ -20,3 +20,8 @@ services:
   App\Application\UseCase\CheckUniqueEmail:
     arguments:
     - '@App\Domain\Specification\User\UniqueEmailSpecification'
+
+  App\Application\UseCase\CheckUniqueNick:
+    public: true
+    arguments:
+    - '@App\Domain\Specification\User\UniqueNicknameSpecification'

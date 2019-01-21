@@ -2,6 +2,7 @@
 
 namespace App\Tests\Persistence\Repository\InMemory;
 
+use App\Domain\Entity\User\NickName;
 use App\Domain\Entity\User\User;
 use App\Domain\Repository\NotFoundException;
 use App\Persistence\Repository\InMemory\UserRepository;
@@ -17,7 +18,7 @@ class UserRepositoryTest extends TestCase
     public function __construct(?string $name = null, array $data = [], string $dataName = '')
     {
         $builder = new UserBuilder();
-        $firstUser = $builder->withId('1')->withEmail($email = 'someemail@gmail.com')->build();
+        $firstUser = $builder->withId('1')->withNick('nick')->withEmail($email = 'someemail@gmail.com')->build();
         $secondUser = $builder->withId('2')->build();
 
         $this->builder = $builder;
@@ -48,6 +49,17 @@ class UserRepositoryTest extends TestCase
         $user = $this->repository->findByEmail('somail@gmail.com');
         $this->assertNull($user);
     }
+
+    public function testFindByNick()
+    {
+        $user = $this->repository->findByNick($nick = new NickName('nick'));
+        $this->assertInstanceOf(User::class, $user);
+        $this->assertTrue($user->getNickName()->isEqual($nick));
+
+        $user = $this->repository->findByNick(new NickName('nicknick'));
+        $this->assertNull($user);
+    }
+
 
     public function testGetById()
     {

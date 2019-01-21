@@ -30,4 +30,13 @@ class NicknameTest extends TestCase
         $this->expectExceptionObject(new \DomainException('Nickname shouldn\'t be empty!'));
         new NickName($nick = '');
     }
+
+    public function testEqual()
+    {
+        $first = new NickName('nick');
+        $second = new NickName('Nick');
+        $third = new NickName('nick1');
+        $this->assertTrue($first->isEqual($second));
+        $this->assertFalse($first->isEqual($third));
+    }
 }

@@ -6,19 +6,20 @@ use App\Infrastructure\Controller\BaseController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-class CheckUniqueEmailController extends BaseController
+class CheckUniqueNickController extends BaseController
 {
     /**
-     * @Route("/email/{email}/check-unique", name="check_email", methods={"GET"})
+     * @Route("/nick/{nick}/check-unique", name="check_email", methods={"GET"})
      */
-    public function index(string $email)
+    public function index(string $nick)
     {
         try {
-
             return $this->json([
-                'unique' => $this->getInteractor()->execute($email)
+                'unique' => $this->getInteractor()->execute($nick)
             ], Response::HTTP_OK);
 
+        } catch (\DomainException $exception) {
+            return $this->json(['errors' => [$exception->getMessage()]], Response::HTTP_BAD_REQUEST);
         } catch (\Throwable $exception) {
             return $this->handleInternalException($exception);
         }

@@ -3,6 +3,7 @@
 namespace App\Persistence\Repository\Doctrine;
 
 
+use App\Domain\Entity\User\NickName;
 use App\Domain\Entity\User\User;
 use App\Domain\Repository\NotFoundException;
 use Doctrine\ORM\EntityManagerInterface;
@@ -40,6 +41,19 @@ class UserRepository implements \App\Domain\Repository\User\UserRepository
     public function findByEmail(string $email): ?User
     {
         return $this->entityRepository->findOneBy(['email' => $email]);
+    }
+
+    public function findByNick(NickName $nick): ?User
+    {
+        return $this->em->createQueryBuilder()
+            ->select('u')
+            ->from(User::class, 'u')
+            ->where('u.nickName.name = :nickName')
+            ->setMaxResults(1)
+            ->setParameter(':nickName', $nick->getNickname())
+            ->getQuery()
+            ->getOneOrNullResult();
+        return $this->entityRepository->findOneBy(['nick' => $nick->getNickname()]);
     }
 
     public function removeAll(): void

@@ -2,3 +2,7 @@ services:
   App\Domain\Specification\User\UniqueEmailSpecification:
     arguments:
       - '@App\Persistence\Repository\Doctrine\UserRepository'
+
+  App\Domain\Specification\User\UniqueNicknameSpecification:
+    arguments:
+      - '@App\Persistence\Repository\Doctrine\UserRepository'
