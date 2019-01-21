@@ -4,3 +4,4 @@ services:
       - '@App\Domain\Specification\User\UniqueEmailSpecification'
       - '@App\Domain\Specification\User\UniqueNicknameSpecification'
       - '@App\Persistence\Repository\Doctrine\UserRepository'
+      - '@App\Infrastructure\Services\SimplePasswordEncryptor'

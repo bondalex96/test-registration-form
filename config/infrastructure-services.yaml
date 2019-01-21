@@ -1,0 +1,3 @@
+services:
+  App\Infrastructure\Services\SimplePasswordEncryptor:
+    class: App\Infrastructure\Services\SimplePasswordEncryptor

@@ -8,6 +8,7 @@ use App\Domain\Entity\User\NickName;
 use App\Domain\Entity\User\User;
 use App\Domain\Entity\User\UserName;
 use App\Domain\Repository\User\UserRepository;
+use App\Domain\Services\PasswordEncryptor;
 use App\Domain\Specification\User\UniqueEmailSpecification;
 use App\Domain\Specification\User\UniqueNicknameSpecification;
 
@@ -19,16 +20,18 @@ class UserFactory
     private $userRepository;
     private $uniqueEmailSpecification;
     private $uniqueNicknameSpecification;
+    private $passwordEncryptor;
 
     public function __construct(
         UniqueEmailSpecification $uniqueEmailSpecification,
         UniqueNicknameSpecification $uniqueNicknameSpecification,
-        UserRepository $userRepository
-    )
-    {
+        UserRepository $userRepository,
+        PasswordEncryptor $passwordEncryptor
+    ) {
         $this->userRepository = $userRepository;
         $this->uniqueEmailSpecification = $uniqueEmailSpecification;
         $this->uniqueNicknameSpecification = $uniqueNicknameSpecification;
+        $this->passwordEncryptor = $passwordEncryptor;
     }
 
     public function register(string $nick, string $firstName, string $lastName, string $email, string $password): User
@@ -50,8 +53,8 @@ class UserFactory
         );
 
         $this->assertMinLength($password, self::PASSWORD_MIN_LENGTH, "Password shouldn't contain less than " . self::PASSWORD_MIN_LENGTH ." characters");
-        $passwordHash = password_hash($password, PASSWORD_BCRYPT);
-        $user->setPassword($passwordHash);
+        $encryptedPassword = $this->passwordEncryptor->encrypt($password);
+        $user->setPassword($encryptedPassword);
 
         return $user;
     }
