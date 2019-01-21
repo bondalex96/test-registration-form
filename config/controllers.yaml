@@ -1,0 +1,8 @@
+services:
+  App\Api\Controller\RegistrationController:
+    arguments:
+      - '@App\Application\UseCase\Registration'
+      - '@logger'
+      - 'App\Api\HttpForm\Registration'
+    tags:
+    - { name: controller.service_arguments }
