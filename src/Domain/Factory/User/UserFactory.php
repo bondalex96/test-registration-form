@@ -37,10 +37,10 @@ class UserFactory
     public function register(string $nick, string $firstName, string $lastName, string $email, string $password): User
     {
         if (!$this->uniqueEmailSpecification->isSatisfiedBy($email)) {
-            throw new \DomainException('User with email ' . $email . ' already exists!');
+            throw new \DomainException('Пользователь с  электронным адресом ' . $email . ' уже существует в системе!');
         }
         if (!$this->uniqueNicknameSpecification->isSatisfiedBy($nickName = new NickName($nick))) {
-            throw new \DomainException('User with nick ' . $nick . ' already exists!');
+            throw new \DomainException('Пользователь с ником ' . $nick . ' уже существует в системе!');
         }
 
         $userId = $this->userRepository->nextId();
@@ -52,7 +52,7 @@ class UserFactory
             $email
         );
 
-        $this->assertMinLength($password, self::PASSWORD_MIN_LENGTH, "Password shouldn't contain less than " . self::PASSWORD_MIN_LENGTH ." characters");
+        $this->assertMinLength($password, self::PASSWORD_MIN_LENGTH, "Пароль не может содержать менее " . self::PASSWORD_MIN_LENGTH ." символов");
         $encryptedPassword = $this->passwordEncryptor->encrypt($password);
         $user->setPassword($encryptedPassword);
 

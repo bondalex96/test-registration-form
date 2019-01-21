@@ -76,8 +76,8 @@ class User
 
     private function setEmail(string $email): void
     {
-        $this->assertNotEmpty($email, 'Email can\'t be empty!');
-        $this->assertEmail($email, 'Invalid email!');
+        $this->assertNotEmpty($email, 'Электронный адрес обязательна для ввода!');
+        $this->assertEmail($email, 'Невалидный электронный адрес!');
         $this->email = $email;
     }
 }

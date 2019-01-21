@@ -16,6 +16,6 @@ class DomainExceptionListener
             return;
         }
 
-        $event->setResponse(new JsonResponse(['errors' => $exception->getMessage()], Response::HTTP_BAD_REQUEST));
+        $event->setResponse(new JsonResponse(['errors' => [$exception->getMessage()]], Response::HTTP_BAD_REQUEST));
     }
 }

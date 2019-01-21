@@ -33,15 +33,15 @@ class UserName
 
     private function setFirstName(string $firstName): void
     {
-        $this->assertNotEmpty($firstName,'First name shouldn\'t be empty!');
-        $this->assertThatContainOnlyRussianCharacters($firstName, 'First name should have only Russian characters!');
+        $this->assertNotEmpty($firstName,'Имя обязательно для ввода!');
+        $this->assertThatContainOnlyRussianCharacters($firstName, 'Имя может содержать только русские символы!');
         $this->firstName = $firstName;
     }
 
     private function setLastName(string $lastName): void
     {
-        $this->assertNotEmpty($lastName,'Last name shouldn\'t be empty!');
-        $this->assertThatContainOnlyRussianCharacters($lastName, 'Last name should have only Russian characters!');
+        $this->assertNotEmpty($lastName,'Фамилия обязательна для ввода!');
+        $this->assertThatContainOnlyRussianCharacters($lastName, 'Фамилия может содержать только русские символы!');
 
         $this->lastName = $lastName;
     }

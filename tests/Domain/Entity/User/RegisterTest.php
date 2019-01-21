@@ -29,7 +29,7 @@ class RegisterTest extends TestCase
 
     public function testRegistrationWithInvalidEmail()
     {
-        $this->expectExceptionObject(new \DomainException('Invalid email!'));
+        $this->expectExceptionObject(new \DomainException('Невалидный электронный адрес!'));
         User::register(
             $id = '1',
             $nickname = new Nickname($nick = 'nick96'),
@@ -41,7 +41,7 @@ class RegisterTest extends TestCase
 
     public function testRegistrationWithEmptyEmail()
     {
-        $this->expectExceptionObject(new \DomainException('Email can\'t be empty!'));
+        $this->expectExceptionObject(new \DomainException('Электронный адрес обязательна для ввода!'));
         User::register(
             $id = '1',
             $nickname = new Nickname($nick = 'nick96'),

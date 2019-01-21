@@ -45,7 +45,7 @@ class UserFactoryTest extends TestCase
 
         $email = 'some-email@gmail.com';
 
-        $this->expectExceptionObject(new \DomainException('User with email ' . $email . ' already exists!'));
+        $this->expectExceptionObject(new \DomainException('Пользователь с  электронным адресом ' . $email . ' уже существует в системе!'));
         $userFactory->register($nick = 'nick96', $firstName = 'имя', $lastName = 'фамилия', $email , $password = 'pa23pa2');
     }
 
@@ -64,7 +64,7 @@ class UserFactoryTest extends TestCase
 
         $email = 'some-email@gmail.com';
         $nick = 'nick96';
-        $this->expectExceptionObject(new \DomainException('User with nick ' . $nick . ' already exists!'));
+        $this->expectExceptionObject(new \DomainException('Пользователь с ником ' . $nick . ' уже существует в системе!'));
         $userFactory->register($nick, $firstName = 'имя', $lastName = 'фамилия', $email , $password = 'pa23pa2');
     }
 
@@ -81,7 +81,7 @@ class UserFactoryTest extends TestCase
 
         $userFactory = new UserFactory($uniqueEmailSpecification, $uniqueNickSpecification, $repository, new SimplePasswordEncryptor());
 
-        $this->expectExceptionObject(new \DomainException('Password shouldn\'t contain less than 5 characters'));
+        $this->expectExceptionObject(new \DomainException('Пароль не может содержать менее 5 символов'));
         $userFactory->register($nick = 'nick96', $firstName = 'имя', $lastName = 'фамилия', $email = 'some-email@gmail.com', $password = 'pa23');
     }
 }

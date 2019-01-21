@@ -29,9 +29,9 @@ class NickName
 
     private function setNickName(string $nickName): void
     {
-        $this->assertNotEmpty($nickName, 'Nickname shouldn\'t be empty!');
-        $this->assertThatFirstCharacterIsLatin($nickName, 'Nickname should starts from latin characters!');
-        $this->assertThatContainOnlyLatinCharactersAndDigits($nickName, 'Nickname should contain only numbers and latin characters!');
+        $this->assertNotEmpty($nickName, 'Никнэйм не должен быть пустым!');
+        $this->assertThatFirstCharacterIsLatin($nickName, 'Первый символ никнэйма может содержать только латинские символы!');
+        $this->assertThatContainOnlyLatinCharactersAndDigits($nickName, 'Никнэйм может содержать только латинские символы и цифры!');
         $this->name = $nickName;
     }
 }

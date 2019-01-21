@@ -16,25 +16,25 @@ class UserNameTest extends TestCase
 
     public function testCreationWithNoRussianCharOnFirstName()
     {
-        $this->expectExceptionObject(new \DomainException('First name should have only Russian characters!'));
+        $this->expectExceptionObject(new \DomainException('Имя может содержать только русские символы!'));
         new UserName($firstName = 'firstName', $lastName = 'фамилия');
     }
 
     public function testCreationWithEmptyFirstName()
     {
-        $this->expectExceptionObject(new \DomainException('First name shouldn\'t be empty!'));
+        $this->expectExceptionObject(new \DomainException('Имя обязательно для ввода!'));
         new UserName($firstName = '', $lastName = 'фамилия');
     }
 
     public function testCreationWithNoRussianCharOnLastName()
     {
-        $this->expectExceptionObject(new \DomainException('Last name should have only Russian characters!'));
+        $this->expectExceptionObject(new \DomainException('Фамилия может содержать только русские символы!'));
         new UserName($firstName = 'имя', $lastName = 'LastName');
     }
 
     public function testCreationWithEmptyLastName()
     {
-        $this->expectExceptionObject(new \DomainException('Last name shouldn\'t be empty!'));
+        $this->expectExceptionObject(new \DomainException('Фамилия обязательна для ввода!'));
         new UserName($firstName = 'имя', $lastName = '');
     }
 }

@@ -62,7 +62,7 @@ class RegistrationTest extends KernelTestCase
             $email = 'some@email.com',
             'password'
         );
-        $this->expectExceptionObject(new \DomainException('User with email ' . $email . ' already exists!'));
+        $this->expectExceptionObject(new \DomainException('Пользователь с  электронным адресом ' . $email . ' уже существует в системе!'));
         $this->interactor->execute($dto);
     }
 
@@ -75,7 +75,7 @@ class RegistrationTest extends KernelTestCase
             $email = 'somee@email.com',
             'password'
         );
-        $this->expectExceptionObject(new \DomainException('User with nick ' . $nick . ' already exists!'));
+        $this->expectExceptionObject(new \DomainException('Пользователь с ником ' . $nick . ' уже существует в системе!'));
         $this->interactor->execute($dto);
     }
 }
