@@ -7,29 +7,29 @@ use Symfony\Component\Validator\Constraints as Assert;
 class RegistrationDto
 {
     /**
-     * @Assert\NotBlank
+     * @Assert\NotBlank(message="nick cannot be blank!")
      */
     public $nick;
 
     /**
-     * @Assert\NotBlank
+     * @Assert\NotBlank(message="first name cannot be blank!")
      */
     public $firstName;
 
     /**
-     * @Assert\NotBlank
+     * @Assert\NotBlank(message="last name cannot be blank!")
      */
     public $lastName;
 
     /**
-     * @Assert\NotBlank
-     * @Assert\Email
+     * @Assert\NotBlank(message="email cannot be blank!")
+     * @Assert\Email(message="email is invalid!")
      */
     public $email;
 
     /**
-     * @Assert\NotBlank
-     * @Assert\Length(min="5")
+     * @Assert\NotBlank(message="password cannot be blank!")
+     * @Assert\Length(min="5", minMessage="password cannot be shorter than five characters")
      */
     public $password;
 

@@ -30,7 +30,7 @@ class RegistrationController extends BaseWriteController
 
         } catch (FormValidationException $exception) {
             return $this->json([
-                'errors' => [$exception->getErrorsMessages()]
+                'errors' => $exception->getErrorsMessages()
             ], Response::HTTP_BAD_REQUEST);
 
         } catch (\Throwable $exception) {
