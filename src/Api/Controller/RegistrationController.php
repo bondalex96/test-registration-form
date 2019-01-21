@@ -2,10 +2,8 @@
 
 namespace App\Api\Controller;
 
-use App\Application\DTO\RegistrationDto;
-use App\Application\UseCase\Registration;
 use App\Infrastructure\Controller\BaseWriteController;
-use Symfony\Component\HttpFoundation\Request;
+use App\Infrastructure\Form\FormValidationException;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -15,20 +13,28 @@ class RegistrationController extends BaseWriteController
     /**
      * @Route("/register", name="registration", methods={"POST"})
      */
-    public function index(Request $request)
+    public function index()
     {
-        return $this->executeAction($request, function (RegistrationDto $dto) {
+        try {
 
-            $user = $this->getInteractor()->execute($dto);
+            $user = $this->getInteractor()->execute();
 
             return $this->json([
                 'id' => $user->getId()
             ], Response::HTTP_CREATED);
-        });
-    }
 
-    protected function getInteractor(): Registration
-    {
-        return $this->interactor;
+        } catch (\DomainException $exception) {
+            return $this->json([
+                'errors' => [$exception->getMessage()]
+            ], Response::HTTP_BAD_REQUEST);
+
+        } catch (FormValidationException $exception) {
+            return $this->json([
+                'errors' => [$exception->getErrorsMessages()]
+            ], Response::HTTP_BAD_REQUEST);
+
+        } catch (\Throwable $exception) {
+            return $this->handleInternalException($exception);
+        }
     }
 }
