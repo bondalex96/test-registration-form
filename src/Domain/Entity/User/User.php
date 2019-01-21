@@ -9,7 +9,6 @@ class User
 {
     use AssertTrait;
 
-    private const PASSWORD_MIN_LENGTH = 5;
     private $id;
     private $nickName;
     private $userName;
@@ -57,6 +56,12 @@ class User
         return $this->password;
     }
 
+    public function setPassword(string $password): void
+    {
+        $this->password = $password;
+    }
+
+
     // Private Methods
 
     private function setNickName(NickName $nickName): void
@@ -67,12 +72,6 @@ class User
     private function setUserName(UserName $userName): void
     {
         $this->userName = $userName;
-    }
-
-    private function setPassword(string $password): void
-    {
-        $this->assertMinLength($password, self::PASSWORD_MIN_LENGTH, "Password shouldn't contain less than " . self::PASSWORD_MIN_LENGTH ." characters");
-        $this->password = password_hash($password, PASSWORD_BCRYPT);
     }
 
     private function setEmail(string $email): void

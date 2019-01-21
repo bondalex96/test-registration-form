@@ -2,4 +2,5 @@ services:
   App\Domain\Factory\User\UserFactory:
     arguments:
       - '@App\Domain\Specification\User\UniqueEmailSpecification'
+      - '@App\Domain\Specification\User\UniqueNicknameSpecification'
       - '@App\Persistence\Repository\Doctrine\UserRepository'

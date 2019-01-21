@@ -26,6 +26,7 @@ class RegistrationTest extends KernelTestCase
         $firstUser = $userBuilder
             ->withId($this->repository->nextId())
             ->withEmail('some@email.com')
+            ->withNick('nick')
             ->build();
 
         $this->repository->removeAll();
@@ -55,13 +56,26 @@ class RegistrationTest extends KernelTestCase
     public function testRegistrationWithExistingEmail()
     {
         $dto = RegistrationDto::create(
-            'some90',
+            'some91',
             'имя',
             'фамилия',
             $email = 'some@email.com',
             'password'
         );
         $this->expectExceptionObject(new \DomainException('User with email ' . $email . ' already exists!'));
+        $this->interactor->execute($dto);
+    }
+
+    public function testRegistrationWithExistingNick()
+    {
+        $dto = RegistrationDto::create(
+            $nick = 'nick',
+            'имя',
+            'фамилия',
+            $email = 'somee@email.com',
+            'password'
+        );
+        $this->expectExceptionObject(new \DomainException('User with nick ' . $nick . ' already exists!'));
         $this->interactor->execute($dto);
     }
 }

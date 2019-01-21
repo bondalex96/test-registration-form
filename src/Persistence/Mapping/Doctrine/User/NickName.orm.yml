@@ -3,3 +3,4 @@ App\Domain\Entity\User\NickName:
   fields:
     name:
       type: string
+      unique: true

@@ -50,16 +50,4 @@ class RegisterTest extends TestCase
             $password = 'pa23pa2'
         );
     }
-
-    public function testRegistrationWithShortPassword()
-    {
-        $this->expectExceptionObject(new \DomainException('Password shouldn\'t contain less than 5 characters'));
-        User::register(
-            $id = '1',
-            $nickname = new Nickname($nick = 'nick96'),
-            new UserName($firstName = 'имя', $lastName = 'фамилия'),
-            $email = 'some-email@gmail.com',
-            $password = 'pa2'
-        );
-    }
 }
