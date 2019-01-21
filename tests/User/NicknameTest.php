@@ -14,19 +14,19 @@ class NicknameTest extends TestCase
 
     public function testCreationWithRussianCharacters()
     {
-        $this->expectException(new \InvalidArgumentException('Nickname should contain only numbers and latin characters!'));
+        $this->expectException(new \DomainException('Nickname should contain only numbers and latin characters!'));
         new NickName($nick = 'Nickкнэйм');
     }
 
     public function testCreationWithoutFirstLatinCharacter()
     {
-        $this->expectException(new \InvalidArgumentException('Nickname should start from latin characters!'));
+        $this->expectException(new \DomainException('Nickname should start from latin characters!'));
         new NickName($nick = '94nick');
     }
 
     public function testCreationEmpty()
     {
-        $this->expectException(new \InvalidArgumentException('Nickname shouldn\'t be empty!'));
+        $this->expectException(new \DomainException('Nickname shouldn\'t be empty!'));
         new NickName($nick = '');
     }
 }
