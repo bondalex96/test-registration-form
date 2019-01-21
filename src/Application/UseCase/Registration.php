@@ -9,7 +9,7 @@ use App\Domain\Entity\User\User;
 use App\Domain\Factory\User\UserFactory;
 use App\Domain\Repository\User\UserRepository;
 
-class Registration
+class Registration implements Interactor
 {
     private $userRepository;
     private $userFactory;
