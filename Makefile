@@ -16,3 +16,6 @@ initialize: ## Initialize project
 	@docker-compose run php bin/console d:m:m -e dev
 	@docker-compose run php bin/console d:d:c -e test
 	@docker-compose run php bin/console d:m:m -e test
+
+run-tests: ## Initialize project
+	@docker-compose run php bin/phpunit
