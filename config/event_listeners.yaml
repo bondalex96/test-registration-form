@@ -21,6 +21,10 @@ services:
         tags:
         - { name: kernel.event_listener, event: kernel.exception, method: onKernelException, priority: 10 }
 
+    App\Infrastructure\EventListener\ExceptionsHandling\CommandValidationExceptionListener:
+        tags:
+        - { name: kernel.event_listener, event: kernel.exception, method: onKernelException, priority: 10 }
+
     App\Infrastructure\EventListener\ExceptionsHandling\InternalExceptionListener:
         arguments:
         - '@logger'
