@@ -1,22 +1,7 @@
 services:
-  App\Infrastructure\Controller\BaseController:
-    arguments:
-    - '@logger'
-    tags:
-    - { name: controller.service_arguments }
-
   App\Api\Controller\RegistrationController:
     arguments:
       - '@App\Infrastructure\CommandBus\ValidationCommandBus'
+      - '@App\Infrastructure\QueryBus\SimpleQueryBus'
     tags:
       - { name: controller.service_arguments }
-
-  App\Api\Controller\CheckUniqueEmailController:
-    arguments:
-    - '@App\Application\UseCase\CheckUniqueEmail'
-    parent: App\Infrastructure\Controller\BaseController
-
-  App\Api\Controller\CheckUniqueNickController:
-    arguments:
-    - '@App\Application\UseCase\CheckUniqueNick'
-    parent: App\Infrastructure\Controller\BaseController

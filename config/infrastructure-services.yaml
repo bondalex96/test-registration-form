@@ -15,3 +15,7 @@ services:
     arguments:
       - '@App\Infrastructure\CommandBus\SimpleCommandBus'
       - '@App\Infrastructure\CommandBus\ValidatorAdapter'
+
+  App\Infrastructure\QueryBus\SimpleQueryBus:
+    arguments:
+    - '@service_container'

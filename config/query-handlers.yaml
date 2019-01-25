@@ -1,0 +1,11 @@
+services:
+  App\Application\Query\User\CheckUniqueEmailHandler:
+    arguments:
+      - '@App\Domain\Specification\User\UniqueEmailSpecification'
+    public: true
+
+  App\Application\Query\User\CheckUniqueNickHandler:
+    arguments:
+      - '@App\Domain\Specification\User\UniqueNicknameSpecification'
+    public: true
+
