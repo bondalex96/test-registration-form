@@ -1,3 +1,21 @@
 services:
   App\Infrastructure\Services\SimplePasswordEncryptor:
     class: App\Infrastructure\Services\SimplePasswordEncryptor
+
+  App\Infrastructure\CommandBus\ValidatorAdapter:
+    arguments:
+      - '@validator'
+
+  App\Infrastructure\CommandBus\SimpleCommandBus:
+    arguments:
+      - '@service_container'
+
+  App\Infrastructure\CommandBus\ValidationCommandBus:
+    class: App\Infrastructure\CommandBus\ValidationCommandBusProxy
+    arguments:
+      - '@App\Infrastructure\CommandBus\SimpleCommandBus'
+      - '@App\Infrastructure\CommandBus\ValidatorAdapter'
+
+  App\Infrastructure\QueryBus\SimpleQueryBus:
+    arguments:
+    - '@service_container'

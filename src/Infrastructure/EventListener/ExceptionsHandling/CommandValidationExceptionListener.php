@@ -2,18 +2,18 @@
 
 namespace App\Infrastructure\EventListener\ExceptionsHandling;
 
-use App\Infrastructure\Form\FormValidationException;
+use App\Infrastructure\CommandBus\ValidationCommandException;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Event\GetResponseForExceptionEvent;
 
-class FormValidationExceptionListener
+class CommandValidationExceptionListener
 {
     public function onKernelException(GetResponseForExceptionEvent $event)
     {
         $exception = $event->getException();
 
-        if (!$exception instanceof FormValidationException) {
+        if (!$exception instanceof ValidationCommandException) {
             return;
         }
 

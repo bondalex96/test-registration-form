@@ -1,10 +1,13 @@
 <?php
 
-namespace App\Application\DTO;
+namespace App\Application\Command\User;
 
+
+use App\Infrastructure\CommandBus\Command;
 use Symfony\Component\Validator\Constraints as Assert;
 
-class RegistrationDto
+
+final class UserRegistrationCommand implements Command
 {
     /**
      * @Assert\NotBlank(message="Ник обязателен для ввода!")
@@ -33,20 +36,18 @@ class RegistrationDto
      */
     public $password;
 
-    public static function create(
+
+    public function __construct(
         string $nick,
         string $firstName,
         string $lastName,
         string $email,
-        string $password): self
+        string $password)
     {
-        $dto = new self();
-        $dto->nick = $nick;
-        $dto->firstName = $firstName;
-        $dto->lastName = $lastName;
-        $dto->email = $email;
-        $dto->password = $password;
-
-        return $dto;
+        $this->nick = $nick;
+        $this->firstName = $firstName;
+        $this->lastName = $lastName;
+        $this->email = $email;
+        $this->password = $password;
     }
 }
