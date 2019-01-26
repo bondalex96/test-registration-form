@@ -2,17 +2,18 @@
 
 namespace App\Tests\Application\UseCase;
 
-use App\Application\DTO\RegistrationDto;
-use App\Application\UseCase\Registration;
+use App\Application\Command\User\UserRegistrationCommand;
+use App\Application\Command\User\UserRegistrationHandler;
 use App\Domain\Entity\User\User;
 use App\Persistence\Repository\Doctrine\UserRepository;
 use App\Test\User\UserBuilder;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 
-class RegistrationTest extends KernelTestCase
+class UserRegistrationHandlerTest extends KernelTestCase
 {
     private $repository;
-    private $interactor;
+    /** @var UserRegistrationHandler */
+    private $handler;
 
     public function __construct(?string $name = null, array $data = [], string $dataName = '')
     {
@@ -20,7 +21,7 @@ class RegistrationTest extends KernelTestCase
         $container = self::$container;
 
         $this->repository = $container->get(UserRepository::class);
-        $this->interactor = $container->get(Registration::class);
+        $this->handler = $container->get(UserRegistrationHandler::class);
 
         $userBuilder = new UserBuilder();
         $firstUser = $userBuilder
@@ -37,14 +38,14 @@ class RegistrationTest extends KernelTestCase
 
     public function testSuccessRegistration()
     {
-        $dto = RegistrationDto::create(
+        $command = new UserRegistrationCommand(
             $nick = 'some90',
             $firstName = 'имя',
             $lastName = 'фамилия',
             $email = 'newemail@gmail.com',
             'password'
         );
-        $user = $this->interactor->execute($dto);
+        $user = $this->handler->handle($command);
         $this->assertInstanceOf(User::class, $user);
         $this->assertEquals($user->getNickName()->getNickname(), $nick);
         $this->assertEquals($user->getName()->getFirstName(), $firstName);
@@ -55,7 +56,7 @@ class RegistrationTest extends KernelTestCase
 
     public function testRegistrationWithExistingEmail()
     {
-        $dto = RegistrationDto::create(
+        $command = new UserRegistrationCommand(
             'some91',
             'имя',
             'фамилия',
@@ -63,12 +64,12 @@ class RegistrationTest extends KernelTestCase
             'password'
         );
         $this->expectExceptionObject(new \DomainException('Пользователь с  электронным адресом ' . $email . ' уже существует в системе!'));
-        $this->interactor->execute($dto);
+        $this->handler->handle($command);
     }
 
     public function testRegistrationWithExistingNick()
     {
-        $dto = RegistrationDto::create(
+        $command = new UserRegistrationCommand(
             $nick = 'nick',
             'имя',
             'фамилия',
@@ -76,6 +77,6 @@ class RegistrationTest extends KernelTestCase
             'password'
         );
         $this->expectExceptionObject(new \DomainException('Пользователь с ником ' . $nick . ' уже существует в системе!'));
-        $this->interactor->execute($dto);
+        $this->handler->handle($command);
     }
 }
