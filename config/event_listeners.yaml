@@ -21,6 +21,14 @@ services:
         tags:
         - { name: kernel.event_listener, event: kernel.exception, method: onKernelException, priority: 10 }
 
+    App\Infrastructure\EventListener\ExceptionsHandling\MethodNotAllowedHttpExceptionListener:
+        tags:
+        - { name: kernel.event_listener, event: kernel.exception, method: onKernelException, priority: 10 }
+
+    App\Infrastructure\EventListener\ExceptionsHandling\NotFoundHttpExceptionListener:
+        tags:
+        - { name: kernel.event_listener, event: kernel.exception, method: onKernelException, priority: 10 }
+
     App\Infrastructure\EventListener\ExceptionsHandling\InternalExceptionListener:
         arguments:
         - '@logger'
