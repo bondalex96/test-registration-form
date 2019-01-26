@@ -19,9 +19,12 @@ class CheckUniqueNickHandler implements QueryHandler
         $this->specification = $specification;
     }
 
+    /**
+     * @param CheckUniqueNickQuery $query
+     * @return SatisfactionOfCondition
+     */
     public function handle(Query $query): object
     {
-        /** @var CheckUniqueNickQuery $query */
         Assert::isInstanceOf($query, CheckUniqueNickQuery::class);
 
         $isSatisfiedBy = $this->specification->isSatisfiedBy(new NickName($query->nick));

@@ -18,9 +18,12 @@ class CheckUniqueEmailHandler implements QueryHandler
         $this->specification = $specification;
     }
 
+    /**
+     * @param CheckUniqueEmailQuery $query
+     * @return SatisfactionOfCondition
+     */
     public function handle(Query $query): object
     {
-        /** @var CheckUniqueEmailQuery $query */
         Assert::isInstanceOf($query, CheckUniqueEmailQuery::class);
 
         $isSatisfiedBy = $this->specification->isSatisfiedBy($query->email);

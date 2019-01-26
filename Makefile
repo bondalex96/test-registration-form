@@ -19,3 +19,6 @@ initialize: ## Initialize project
 
 run-tests: ## Initialize project
 	@docker-compose run php bin/phpunit
+
+run-code-analyze: ## Initialize project
+	@docker-compose run php vendor/bin/phpstan analyze -l 7 src/

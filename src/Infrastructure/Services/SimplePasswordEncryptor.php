@@ -9,6 +9,11 @@ class SimplePasswordEncryptor implements PasswordEncryptor
 {
     public function encrypt(string $password): string
     {
-       return password_hash($password, PASSWORD_BCRYPT);
+        $hash = password_hash($password, PASSWORD_BCRYPT);
+
+        if ($hash) {
+            return $hash;
+        }
+        throw new \Exception('Encryption password failed!');
     }
 }

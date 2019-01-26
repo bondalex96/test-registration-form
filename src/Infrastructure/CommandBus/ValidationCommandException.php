@@ -12,6 +12,8 @@ class ValidationCommandException extends \LogicException
         array_map(function ($error) {
             $this->addError($error);
         }, $errors);
+
+        parent::__construct("Command is invalid!");
     }
 
     public function getErrorsMessages(): array

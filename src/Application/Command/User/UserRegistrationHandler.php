@@ -20,9 +20,12 @@ class UserRegistrationHandler implements CommandHandler
         $this->userRepository = $userRepository;
     }
 
+    /**
+     * @param UserRegistrationCommand $command
+     * @return \App\Domain\Entity\User\User
+     */
     public function handle(Command $command)
     {
-        /** @var $command UserRegistrationCommand */
         Assert::isInstanceOf($command, UserRegistrationCommand::class);
 
         $user = $this->userFactory->register(

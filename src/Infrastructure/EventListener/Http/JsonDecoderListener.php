@@ -31,10 +31,13 @@ class JsonDecoderListener
         $request = $event->getRequest();
 
         if ($request->headers->has('Content-Type')) {
-            $contentType = $request->headers->get('Content-Type');
+            /** @var string $contentType */
+            $contentType = $request->headers->get('Content-Type', '');
 
             if (substr_count($contentType, 'application/json') > 0) {
-                $data = json_decode($request->getContent(), true);
+                /** @var string $requestContent */
+                $requestContent = $request->getContent();
+                $data = json_decode($requestContent, true);
 
                 if (is_array($data)) {
                     $request->request = new ParameterBag($data);
